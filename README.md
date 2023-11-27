@@ -2,16 +2,23 @@
 
 Este repositório é referente a um desafio técnico onde haviam exigências de um cadastro com validação de usuários e uma autenticação por meio de token.
 
-O banco de dados utilizado neste projeto é o MongoDB..
+O banco de dados utilizado neste projeto é o MongoDB online, caso queira usar localmente faça as configurações necessárias..
 
 ## Como usar o projeto
-
-### Com doker
 Faça o clone do projeto com o seguinte comando:
 ~~~
 git clone https://github.com/NascimentoFrancisco/api-express-jwt.git
 ~~~
+Antes de tudo configure o arquivo `.env` em seu projeto dessa forma:
+~~~
+PORT=8080
+DATABASE_URL= Url do banco de dados MongoDB
+JWT_SECRET= Crie uma chave secreta
 
+~~~
+**OBS:** Altere a porta na url caso esteja usando a configuração no docker use a porta `8080`, caso contrário use a porta `8000`.
+
+### Com doker
 Agora tendo o docker instaldo em sua máquina faça os seguintes passos:
 
 Faça a construção da imagem:
@@ -39,7 +46,6 @@ Esta aplicação está executando com o nodemon, por isso o comando está `npm r
 Agora abra o Postman ou outro app similar e teste as urls da API:
 
 ## Urls e dados da API
-**OBS:** Altere a porta na url caso esteja usando a configuração no docker use a porta `8080`, caso contrário use a porta `8000`.
 ## Cadastro de usuários:
 
 Requisição `POST` na url: `http://localhost:8080/user`
