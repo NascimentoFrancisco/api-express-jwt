@@ -3,10 +3,13 @@ const usermodel = require("../models/user")
 const UserController = {
 
     async createUser (req, res){
+        let user
         const body = req.body
         try{
-            const newUser = await usermodel.create(body)
-            res.status(201).json(newUser)
+            user = await usermodel.create(body)
+            user = user.toObject()
+            delete user.password
+            res.status(201).json(user)
         }catch(e){
             //Verficação se o email não pertence a um usuáio já cadastrado
             if (e.code === 11000){

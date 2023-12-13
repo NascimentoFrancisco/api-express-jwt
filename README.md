@@ -13,7 +13,8 @@ Antes de tudo configure o arquivo `.env` em seu projeto dessa forma:
 ~~~
 PORT=8080
 DATABASE_URL= Url do banco de dados MongoDB
-JWT_SECRET= Crie uma chave secreta
+JWT_SECRET= Faça uma chave secreta
+JWT_SECRET_REFRESH= Faça outra chave secreta
 
 ~~~
 **OBS:** Altere a porta na url caso esteja usando a configuração no docker use a porta `8080`, caso contrário use a porta `8000`.
@@ -53,7 +54,7 @@ Requisição `POST` na url: `http://localhost:8080/user`
 Com a seguinte estrutra `json`:
 ~~~ json
 {
-    "name": "Testes dos testes",
+    "name": "Teste dos testes",
     "email": "teste@gmail.com",
     "password": "12345",
     "phone": [
@@ -67,19 +68,18 @@ Com a seguinte estrutra `json`:
 ### Sucesso:
 ~~~ json
 {
-    "name": "Paulo Leite",
-    "email": "paulo@gmail.com",
-    "password": "$2b$10$af9QzhdwpZgNiaRqMvBga./ugELS8QmYvK3AhvY8HSfVaFfDkMbne",
+    "name": "Teste dos testes",
+    "email": "teste@gmail.com",
     "phone": [
         {
             "number": "988888888",
             "ddd": "99",
-            "_id": "65627effcf741c96019ce955"
+            "_id": "id do objeto"
         }
     ],
-    "_id": "65627effcf741c96019ce954",
-    "create_at": "2023-11-25T23:10:55.944Z",
-    "updated_at": "2023-11-25T23:10:55.944Z",
+    "_id": "id do objeto",
+    "create_at": "2023-11-27T18:16:40.990Z",
+    "updated_at": "2023-11-27T18:16:40.991Z",
     "__v": 0
 }
 ~~~
@@ -106,11 +106,18 @@ Informações a serem enviadas:
 ### Sucesso:
 ~~~ json
 {
-    "accessToken": "Token de acesso"
+    "accessToken": "Token de acesso",
+    "refreshToken": "RefreshToken para atualizar o accessToken"
 }
 ~~~
 
 ### Erros:
+Dados vazios:
+~~~json
+{
+    "mensagem": "Todos os campos são obrigatórios"
+}
+~~~
 Dados inválidos:
 ~~~ json
 {
@@ -126,21 +133,19 @@ Esteja ciente que aqui é preciso enviar o `token de acesso` para obter as infor
 ### sucesso:
 ~~~ json
 {
-    "_id": "id do usuário",
     "name": "Teste dos testes",
     "email": "teste@gmail.com",
-    "password": "$2b$10$K8gJ9zS9Wte7RF/kh/ApFOmo11aDdumnCwDTKaU6epL3bOw9MMphe",
     "phone": [
         {
             "number": "988888888",
             "ddd": "99",
-            "_id": "id"
+            "_id": "id do objeto"
         }
     ],
-    "create_at": "2023-11-25T22:35:01.743Z",
-    "updated_at": "2023-11-25T22:35:01.744Z",
-    "__v": 0,
-    "last_login": "2023-11-25T23:20:04.088Z"
+    "_id": "id do objeto",
+    "create_at": "2023-11-27T18:16:40.990Z",
+    "updated_at": "2023-11-27T18:16:40.991Z",
+    "__v": 0
 }
 ~~~
 

@@ -11,10 +11,16 @@ app.use(routes)
 
 const PORT = process.env.PORT
 
-
-mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true }, console.log('Conexão mongo'));
+//Conexão com o banco de dados
+mongoose.connect(
+    process.env.DATABASE_URL, 
+    {
+        useNewUrlParser: true, 
+        useUnifiedTopology: true 
+    }, 
+)
 
 
 app.listen(PORT, () => {
-    console.log(`Rodando na porta ${PORT}`)
+    //console.log(`Rodando na porta ${PORT}`)
 })

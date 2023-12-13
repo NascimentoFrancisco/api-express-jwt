@@ -12,7 +12,7 @@ const validateToken = asyncHandler(async(req, res, next) =>{
                 if(e.expiredAt){
                     return res.status(401).json({mensagem: "Tempo de 30 minutos expirado"})
                 } else if(e.name === "JsonWebTokenError"){
-                    return res.status(401).json({mensagem: "Não autorizado"})
+                    return res.status(401).json({mensagem: "Token inválido"})
                 }
             }
             req.user = decoded.user

@@ -8,24 +8,35 @@ const User = require("../models/user")
 const loginUser = asyncHandler(async (req, res) =>{
     const {email, password} = req.body
     if(!email || !password){
-        res.status(400).json({mensagem: "Todos os campos são obrigatórios"})
+        return res.status(400).json({mensagem: "Todos os campos são obrigatórios"})
     }
     const user = await User.findOne({email})
     if (user && (await bcrypt.compare(password, user.password))){
-        accessToken = jwt.sign({
-            user: {
-                user: user.email,
-                id: user.id
-            }
-        }, process.env.JWT_SECRET,
-            {expiresIn: "30m"}
+        accessToken = jwt.sign(
+            {
+                user: {
+                    user: user.email,
+                    id: user.id
+                }
+            }, process.env.JWT_SECRET,
+            {expiresIn: "1m"}
         )
-        res.status(200).json({
-            accessToken
-        })
+        refreshToken = jwt.sign(
+            {
+                user: {
+                    user: user.email,
+                    id: user.id
+                }
+            }, process.env.JWT_SECRET_REFRESH,
+            {expiresIn: "10m"}
+        )
         user.updateLastLogin()
+        return res.status(200).json({
+            accessToken,
+            refreshToken
+        })
     }else{
-        res.status(401).json({mensagem: "Email ou senha inválidos"})
+        return res.status(401).json({mensagem: "Email ou senha inválidos"})
     }
 })
 
