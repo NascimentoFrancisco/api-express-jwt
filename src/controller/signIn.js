@@ -19,7 +19,7 @@ const loginUser = asyncHandler(async (req, res) =>{
                     id: user.id
                 }
             }, process.env.JWT_SECRET,
-            {expiresIn: "1m"}
+            {expiresIn: process.env.TIME_ACCESSTOKEN}
         )
         refreshToken = jwt.sign(
             {
@@ -28,7 +28,7 @@ const loginUser = asyncHandler(async (req, res) =>{
                     id: user.id
                 }
             }, process.env.JWT_SECRET_REFRESH,
-            {expiresIn: "10m"}
+            {expiresIn: process.env.TIME_REFRESHTOKEN}
         )
         user.updateLastLogin()
         return res.status(200).json({
